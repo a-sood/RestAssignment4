@@ -16,7 +16,7 @@ namespace RestAssignment4.Models
     // Check to see if review is valid
     public bool CheckStars()
         {
-            if (this.Stars > 5 || this.Stars < 0)
+            if (this.Stars > 5 || this.Stars < 1)
             {
                 return false;
             }
@@ -24,6 +24,36 @@ namespace RestAssignment4.Models
             {
                 return true;
             }
+        }
+    
+    // Return false if negative or entered timestamp can't be converted to double
+    public bool CheckTimeStamp()
+        {
+            try
+            {
+                uint time = uint.Parse(this.TimeStamp);
+                return true;
+            } catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+    // Return false if company name is empty
+    public bool CheckCompanyName()
+        {
+            if (this.CompanyName == null || this.CompanyName.Length == 0)
+                return false;
+            return true;
+        }
+
+    // Return false if username is empty
+    public bool CheckUsername()
+        {
+             if (this.UserName == null || this.UserName.Length == 0)
+                return false;
+            return true;
+        
         }
     }
 }

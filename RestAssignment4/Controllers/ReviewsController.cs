@@ -42,11 +42,23 @@ namespace RestAssignment4.Controllers
         {
             if(data == null)
             {
-                return Json(new { response = "failed" });
+                return Json(new { response = "Error: Invalid body JSON" });
             }
             else if (!data.Review.CheckStars())
             {
-                return Json(new { response = "Stars must be a value between 0 and 5" });
+                return Json(new { response = "Error: Stars must be a value between 0 and 5" });
+            }
+            else if (!data.Review.CheckTimeStamp())
+            {
+                return Json(new { response = "Error: Invalid UNIX Timestamp" });
+            }
+            else if (!data.Review.CheckCompanyName())
+            {
+                return Json(new { response = "Error: Empty Company Name Supplied" });
+            }
+            else if (!data.Review.CheckUsername())
+            {
+                return Json(new { response = "Error: Empty Username Supplied" });
             }
             else
             {
