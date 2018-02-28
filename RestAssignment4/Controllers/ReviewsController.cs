@@ -4,17 +4,13 @@ using Newtonsoft.Json.Linq;
 using RestAssignment4.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RestAssignment4.Controllers
 {
     public class ReviewsController : Controller
     {
-        // GET: Reviews
+        // GET: Reviews/GetCompanyReviews/{"companyName":"SEARCH NAME HERE"}
         public JsonResult GetCompanyReviews(string id)
         {
             List<CompanyReview> result = null;
@@ -40,7 +36,7 @@ namespace RestAssignment4.Controllers
             }
         }
 
-        
+        // POST: /Reviews/SaveCompanyReview 
         [HttpPost]
         public JsonResult SaveCompanyReview(ReviewHolder data)
         {
@@ -55,11 +51,11 @@ namespace RestAssignment4.Controllers
                     LinkDatabase db = LinkDatabase.getInstance();
                     db.SaveReview(data.Review);
 
-                    return Json(new { response = "success", sample = data.Review });
+                    return Json(new { response = "success" });
 
                 } catch(Exception e)
                 {
-                    return Json(new { response = "different failed" });
+                    return Json(new { response = "exception thrown", exception = e.Message });
                 }
             }
         }
