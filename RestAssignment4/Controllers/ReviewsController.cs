@@ -44,6 +44,10 @@ namespace RestAssignment4.Controllers
             {
                 return Json(new { response = "failed" });
             }
+            else if (!data.Review.CheckStars())
+            {
+                return Json(new { response = "Stars must be a value between 0 and 5" });
+            }
             else
             {
                 try
